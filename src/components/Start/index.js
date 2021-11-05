@@ -4,8 +4,6 @@ import Board from "../Board";
 function Start() {
   const [options, setOptions] = useState(null);
 
-  useEffect(() => {}, []);
-
   return (
     <div>
       <div className="container">

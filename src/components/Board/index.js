@@ -5,6 +5,9 @@ import "./style.css";
 function Board({ options }) {
   const [game, setGame] = useState([]);
   const [firstCard, setFirstCard] = useState(null);
+  const [seconds, setSeconds] = useState(10);
+  const [result, setResult] = useState(0);
+
 
   const fronts = [
     "👹",
@@ -21,6 +24,15 @@ function Board({ options }) {
     "🦨",
   ];
 
+
+  useEffect(() => {
+    if (seconds > 0) {
+      setTimeout(() => setSeconds(seconds - 1), 10000);
+    } else {
+      setSeconds('Time is over!');
+    }
+  });
+
   useEffect(() => {
     const newGame = [];
     for (let i = 0; i < options / 2; i++) {
@@ -29,14 +41,14 @@ function Board({ options }) {
         frontId: i,
         content: fronts[i],
         flipped: false,
-        matched: false,
+        // matched: false,
       };
       const secondOption = {
         id: 2 * i + 1,
         frontId: i,
         content: fronts[i],
         flipped: false,
-        matched: false,
+        // matched: false,
       };
 
       newGame.push(firstOption);
@@ -51,10 +63,11 @@ function Board({ options }) {
   const flipCardTo = (cardId, flipped) => {
     setGame(
       game.map((item, i) => {
+        ////////////////////////////////// the problem  
         if (i === cardId) {
           return { ... item,
-            content: item.content,
-            flipped: !item.flipped,
+            // content: item.content,
+            flipped: flipped,
           };
         } else {
           return item;
@@ -65,20 +78,24 @@ function Board({ options }) {
   };
 
   const flip = (cardId) => {
-      console.log("id",cardId);
+      // console.log("id",cardId);
     if (firstCard === null) {
       setFirstCard(cardId);
     } else {
-      const firstCardContent = game[firstCard].content;
-      const secondCardContent = game[cardId].content;
+      const firstCardContent = game[firstCard].frontId;
+      const secondCardContent = game[cardId].frontId;
       if (firstCardContent === secondCardContent) {
+        setResult(result+1);
         setFirstCard(null);
         console.log("same");
       } else {
           console.log("diff");
         setTimeout(() => {
+          ////////////////////////////////// the problem  
           flipCardTo(firstCard, false);
+          console.log("ONE",firstCard);
           flipCardTo(cardId, false);
+          console.log("TWO",cardId);
           setFirstCard(null);
         }, 1000);
       }
@@ -90,19 +107,22 @@ function Board({ options }) {
   
   if (game.length === 0) return <div>loading... </div>;
   else {
-  return game.map((card, i) => {
-    console.log("card", card.flipped);
     return (
-      <div className="Board">
-        <Card
-          key={i}
-          flip={() => {flip(i);}}
-          content={card.content}
-          flipped={card.flipped}
-        />
-      </div>
-    );
-  });
+      <>
+        <h4>{seconds}</h4>
+        <h4>{result}</h4>
+        {game.map((card, i) => {
+        return (<div className="Board">
+          <Card
+            key={i}
+            flip={() => {flip(i)}}
+            content={card.content}
+            flipped={card.flipped}
+            />
+        </div>)
+      })}
+      </>
+    )
 }
 }
 
