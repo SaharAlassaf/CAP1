@@ -10,8 +10,8 @@ function Card({ flip, content, flipped }) {
   }
   return (
     <div onClick={flip} className={`Card ${flipped ? "face-up" : ""}`}>
-      <div className="im" >
-      <img src={cardContent} alt=""/>
+      <div className="im">
+        <img src={cardContent} alt="" />
       </div>
       {/* {cardContent} */}
     </div>

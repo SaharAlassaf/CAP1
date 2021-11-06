@@ -34,11 +34,12 @@ function Board({ options }) {
       setSeconds("Time is over!");
       setGame(
         game.map((item, i) => {
-            return {
-              ...item,
-              flipped: true,
-            };
-          }))
+          return {
+            ...item,
+            flipped: true,
+          };
+        })
+      );
     }
   });
 
@@ -119,25 +120,25 @@ function Board({ options }) {
     return (
       <div className="backgroundBoard">
         <div className="containerBoard">
-        <div className="result">
-          <h4>{seconds}</h4>
-          <h4>{result}</h4>
-        </div>
-        <div className="Board">
-          {game.map((card, i) => {
-            return (
-              <div key={i}>
-                <Card
-                  flip={() => {
-                    flip(i);
-                  }}
-                  content={card.content}
-                  flipped={card.flipped}
-                />
-              </div>
-            );
-          })}
-        </div>
+          <div className="result">
+            <h4>{seconds}</h4>
+            <h4>{result}</h4>
+          </div>
+          <div className="Board">
+            {game.map((card, i) => {
+              return (
+                <div key={i}>
+                  <Card
+                    flip={() => {
+                      flip(i);
+                    }}
+                    content={card.content}
+                    flipped={card.flipped}
+                  />
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     );
