@@ -8,28 +8,22 @@ function Board({ options }) {
   const [seconds, setSeconds] = useState(10);
   const [result, setResult] = useState(0);
 
-
   const fronts = [
-    "👹",
-    "👿",
-    "🧠",
-    "🚗",
-    "🚲",
-    "🚂",
-    "🧸",
-    "🤨",
-    "🤟",
-    "♥️",
-    "🦟",
-    "🦨",
+    "🌄",
+    "⛺",
+    "🌅",
+    "🏜️",
+    "🏕️",
+    "🍂",
+    "🔦",
+    "🌋",
   ];
-
 
   useEffect(() => {
     if (seconds > 0) {
       setTimeout(() => setSeconds(seconds - 1), 10000);
     } else {
-      setSeconds('Time is over!');
+      setSeconds("Time is over!");
     }
   });
 
@@ -63,10 +57,10 @@ function Board({ options }) {
   const flipCardTo = (cardId, flipped) => {
     setGame(
       game.map((item, i) => {
-        ////////////////////////////////// the problem  
+        ////////////////////////////////// the problem 😡🔪
         if (i === cardId) {
-          return { ... item,
-            // content: item.content,
+          return {
+            ...item,
             flipped: flipped,
           };
         } else {
@@ -74,56 +68,66 @@ function Board({ options }) {
         }
       })
     );
-    console.log("g",game);
+    console.log("g", game);
   };
 
   const flip = (cardId) => {
-      // console.log("id",cardId);
+    // console.log("id",cardId);
     if (firstCard === null) {
       setFirstCard(cardId);
     } else {
       const firstCardContent = game[firstCard].frontId;
       const secondCardContent = game[cardId].frontId;
       if (firstCardContent === secondCardContent) {
-        setResult(result+1);
+        setResult(result + 1);
         setFirstCard(null);
         console.log("same");
       } else {
-          console.log("diff");
+        console.log("diff");
         setTimeout(() => {
-          ////////////////////////////////// the problem  
+          ////////////////////////////////// the problem 😡🔫
           flipCardTo(firstCard, false);
-          console.log("ONE",firstCard);
+          console.log("ONE", firstCard);
           flipCardTo(cardId, false);
-          console.log("TWO",cardId);
+          console.log("TWO", cardId);
           setFirstCard(null);
         }, 1000);
       }
+      console.log(firstCardContent +" is "+firstCard +" and "+ secondCardContent +" is "+cardId);
     }
     flipCardTo(cardId, !game[cardId].flipped);
+    console.log("F", firstCard);
+
   };
 
-  console.log("F",firstCard);
-  
-  if (game.length === 0) return <div>loading... </div>;
+
+  if (game.flipped === true) return <div>end game</div>;
   else {
     return (
       <>
-        <h4>{seconds}</h4>
-        <h4>{result}</h4>
-        {game.map((card, i) => {
-        return (<div className="Board">
-          <Card
-            key={i}
-            flip={() => {flip(i)}}
-            content={card.content}
-            flipped={card.flipped}
-            />
-        </div>)
-      })}
+        <div className="result">
+          <h4>{seconds}</h4>
+          <h4>{result}</h4>
+        </div>
+        <div className="Board">
+          {game.map((card, i) => {
+            return (
+              <div key={i}>
+                <Card
+                  
+                  flip={() => {
+                    flip(i);
+                  }}
+                  content={card.content}
+                  flipped={card.flipped}
+                />
+              </div>
+            );
+          })}
+        </div>
       </>
-    )
-}
+    );
+  }
 }
 
 export default Board;

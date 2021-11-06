@@ -1,0 +1,19 @@
+.container {
+    margin-top: 10%;
+  }
+  
+  .Board {
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    gap: 50px;
+    justify-content: center;
+    margin: 90px 0;
+  }
+  
+  .instr {
+    margin-top: 80px;
+  }
+  
+  .btnStart {
+    margin-top: 50px;
+  }

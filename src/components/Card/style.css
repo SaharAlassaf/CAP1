@@ -2,8 +2,8 @@
    
 .Card {
     border-style: solid;
-    border: #19466B;
-    background-color: #19466b;
+    border:  rgb(233, 172, 60);
+    background-color: rgb(233, 172, 60);
     height: 100px;
     width: 100px;
     border-radius: 5px;
@@ -15,7 +15,7 @@
   }
   
   .Card.face-up {
-    border: #2A78B8;
-    background-color: #2A78B8;
+    border:  rgb(235, 189, 106);
+    background-color:  rgb(235, 189, 106);
     transform: rotateY(180deg);
   }
