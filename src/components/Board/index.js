@@ -8,16 +8,7 @@ function Board({ options }) {
   const [seconds, setSeconds] = useState(10);
   const [result, setResult] = useState(0);
 
-  const fronts = [
-    "🌄",
-    "⛺",
-    "🌅",
-    "🏜️",
-    "🏕️",
-    "🍂",
-    "🔦",
-    "🌋",
-  ];
+  const fronts = ["🌄", "⛺", "🌅", "🏜️", "🏕️", "🍂", "🔦", "🌋"];
 
   useEffect(() => {
     if (seconds > 0) {
@@ -93,13 +84,19 @@ function Board({ options }) {
           setFirstCard(null);
         }, 1000);
       }
-      console.log(firstCardContent +" is "+firstCard +" and "+ secondCardContent +" is "+cardId);
+      console.log(
+        firstCardContent +
+          " is " +
+          firstCard +
+          " and " +
+          secondCardContent +
+          " is " +
+          cardId
+      );
     }
     flipCardTo(cardId, !game[cardId].flipped);
     console.log("F", firstCard);
-
   };
-
 
   if (game.flipped === true) return <div>end game</div>;
   else {
@@ -114,7 +111,6 @@ function Board({ options }) {
             return (
               <div key={i}>
                 <Card
-                  
                   flip={() => {
                     flip(i);
                   }}

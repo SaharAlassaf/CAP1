@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Board from "../Board";
-import "./style.css"
+import "./style.css";
 
 function Start() {
   const [options, setOptions] = useState(null);
@@ -39,8 +39,8 @@ function Start() {
         <Board options={options} setOptions={setOptions} />
       ) : (
         <div className="instr">
-        <h2>Let's Start!</h2>
-        <p>Instructions here</p>
+          <h2>Let's Start!</h2>
+          <p>Instructions here</p>
         </div>
       )}
     </div>
