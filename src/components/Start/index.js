@@ -6,14 +6,14 @@ function Start() {
   const [options, setOptions] = useState(null);
 
   return (
-    <div>
-      <div className="container">
+    <div className="backgroundStart">
+      <div className="containerStart">
         <h1>Flip Card Game</h1>
         <div className="btnStart">
           {options === null ? (
             <>
-              <button onClick={() => setOptions(4)}>Easy</button>
-              <button onClick={() => setOptions(16)}>Medium</button>
+              <button onClick={() => setOptions(6)}>Easy</button>
+              <button onClick={() => setOptions(12)}>Medium</button>
               {/* <button onClick={() => setOptions(24)}>Hard</button> */}
             </>
           ) : (

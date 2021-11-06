@@ -10,14 +10,21 @@ function Board({ options }) {
   const [gameOver, setGameOver] = useState(false);
 
   const fronts = [
-    "🌄",
-    // require("../imges/test.jpeg").default,
-    "🌅",
-    "🏜️",
-    "🏕️",
-    "🍂",
-    "🔦",
-    "🌋",
+    require("../imges/1.jpg").default,
+    require("../imges/2.jpg").default,
+    require("../imges/3.jpg").default,
+    require("../imges/4.jpg").default,
+    require("../imges/5.jpg").default,
+    require("../imges/6.jpg").default,
+    require("../imges/7.jpg").default,
+    require("../imges/8.jpg").default,
+
+    // "🌅",
+    // "🏜️",
+    // "🏕️",
+    // "🍂",
+    // "🔦",
+    // "🌋",
   ];
 
   useEffect(() => {
@@ -25,6 +32,13 @@ function Board({ options }) {
       setTimeout(() => setSeconds(seconds - 1), 10000);
     } else {
       setSeconds("Time is over!");
+      setGame(
+        game.map((item, i) => {
+            return {
+              ...item,
+              flipped: true,
+            };
+          }))
     }
   });
 
@@ -103,7 +117,8 @@ function Board({ options }) {
   if (game.lenght === 0) return <div>Loading...</div>;
   else {
     return (
-      <>
+      <div className="backgroundBoard">
+        <div className="containerBoard">
         <div className="result">
           <h4>{seconds}</h4>
           <h4>{result}</h4>
@@ -123,7 +138,8 @@ function Board({ options }) {
             );
           })}
         </div>
-      </>
+        </div>
+      </div>
     );
   }
 }
