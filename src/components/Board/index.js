@@ -7,8 +7,18 @@ function Board({ options }) {
   const [firstCard, setFirstCard] = useState(null);
   const [seconds, setSeconds] = useState(10);
   const [result, setResult] = useState(0);
+  const [gameOver, setGameOver] = useState(false);
 
-  const fronts = ["🌄", "⛺", "🌅", "🏜️", "🏕️", "🍂", "🔦", "🌋"];
+  const fronts = [
+    "🌄",
+    // require("../imges/test.jpeg").default,
+    "🌅",
+    "🏜️",
+    "🏕️",
+    "🍂",
+    "🔦",
+    "🌋",
+  ];
 
   useEffect(() => {
     if (seconds > 0) {
@@ -22,83 +32,75 @@ function Board({ options }) {
     const newGame = [];
     for (let i = 0; i < options / 2; i++) {
       const firstOption = {
-        id: 2 * i,
+        id: i,
         frontId: i,
         content: fronts[i],
         flipped: false,
-        // matched: false,
+        matched: false,
       };
-      const secondOption = {
-        id: 2 * i + 1,
-        frontId: i,
-        content: fronts[i],
-        flipped: false,
-        // matched: false,
-      };
-
-      newGame.push(firstOption);
-      newGame.push(secondOption);
+      newGame.push(firstOption, firstOption);
     }
 
     const shuffledGame = newGame.sort(() => Math.random() - 0.5);
+    console.log(shuffledGame);
     setGame(shuffledGame);
-    console.log("arr", shuffledGame);
+    // console.log("shuffledGame arr", shuffledGame);
   }, []);
 
-  const flipCardTo = (cardId, flipped) => {
+  const flipCardTo = (firstCard, cardId, flipped, matched) => {
+    console.log("id ", cardId);
     setGame(
       game.map((item, i) => {
-        ////////////////////////////////// the problem 😡🔪
-        if (i === cardId) {
+        if (i === cardId || firstCard == i) {
           return {
             ...item,
             flipped: flipped,
+            matched: matched,
           };
         } else {
           return item;
         }
       })
     );
-    console.log("g", game);
+  };
+
+  const isGameOver = () => {
+    let done = true;
+    game.forEach((card) => {
+      if (!card.matched) done = false;
+    });
+    setGameOver(done);
+    console.log("done? ", done);
   };
 
   const flip = (cardId) => {
-    // console.log("id",cardId);
     if (firstCard === null) {
       setFirstCard(cardId);
     } else {
       const firstCardContent = game[firstCard].frontId;
       const secondCardContent = game[cardId].frontId;
       if (firstCardContent === secondCardContent) {
+        flipCardTo(firstCard, cardId, true, true);
         setResult(result + 1);
         setFirstCard(null);
-        console.log("same");
+        // console.log("same");
       } else {
-        console.log("diff");
+        // console.log("diff");
         setTimeout(() => {
-          ////////////////////////////////// the problem 😡🔫
-          flipCardTo(firstCard, false);
-          console.log("ONE", firstCard);
-          flipCardTo(cardId, false);
-          console.log("TWO", cardId);
+          flipCardTo(firstCard, cardId, false, false);
           setFirstCard(null);
         }, 1000);
       }
-      console.log(
-        firstCardContent +
-          " is " +
-          firstCard +
-          " and " +
-          secondCardContent +
-          " is " +
-          cardId
-      );
     }
-    flipCardTo(cardId, !game[cardId].flipped);
-    console.log("F", firstCard);
+    if (!game[cardId].matched) {
+      flipCardTo(firstCard, cardId, !game[cardId].flipped, true);
+    }
+    isGameOver();
   };
 
-  if (game.flipped === true) return <div>end game</div>;
+  // console.log("game arr", game);
+
+  if (game.lenght === 0) return <div>Loading...</div>;
   else {
     return (
       <>

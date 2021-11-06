@@ -4,10 +4,9 @@
   font-family: "Open Sans", sans-serif;
 }
 
-body {
-  background: url("https://i.pinimg.com/originals/aa/33/d5/aa33d5bf71e6d8fdb050b1e104b7c437.gif")
-    repeat-y 100% 100% fixed;
-  background-size: 100%;
-  height: 100%;
-  width: 100%;
-}
+/* body{
+  background:url('https://i.pinimg.com/originals/aa/33/d5/aa33d5bf71e6d8fdb050b1e104b7c437.gif') repeat-y 100% 100% fixed;
+  background-size:100%;
+  height:100%;
+  width:100%;
+} */

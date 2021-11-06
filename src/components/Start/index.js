@@ -40,7 +40,16 @@ function Start() {
       ) : (
         <div className="instr">
           <h2>Let's Start!</h2>
-          <p>Instructions here</p>
+          <p>
+            Pic Flip™️ is a matching card game for 7-year-olds and up providing
+            fast-paced fun that moves at the speed of flipping! Gameplay is so
+            easy to understand, young kids can play independently. Kids will
+            love flipping through their cards to find a match, then calling it
+            out. The fastest flipper who gets rid of all their cards wins!
+            Players practice focus, matching skills, and manual dexterity while
+            having fun! Makes a great gift for kids 7 years and older, but no
+            matter their age they'll want to play over and over again!
+          </p>
         </div>
       )}
     </div>
